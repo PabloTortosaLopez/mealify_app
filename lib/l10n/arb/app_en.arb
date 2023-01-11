@@ -1,7 +1,15 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+    "mealify": "Mealify App",
+    "@mealify": {
+        "description": "AppBar Title"
+    },
+    "ideas": "Ideas",
+    "@ideas": {
+        "description": "Text shown in the Home Scaffold for the Ideas section"
+    },
+    "favorites": "Favorites",
+    "@favorites": {
+        "description": "Text shown in the Home Scaffold for the Favorites section"
     }
 }

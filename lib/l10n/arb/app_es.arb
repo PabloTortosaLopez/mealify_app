@@ -1,7 +1,15 @@
 {
     "@@locale": "es",
-    "counterAppBarTitle": "Contador",
-    "@counterAppBarTitle": {
-        "description": "Texto mostrado en la AppBar de la página del contador"
+    "mealify": "Mealify App",
+    "@mealify": {
+        "description": "AppBar Title"
+    },
+   "ideas": "Ideas",
+    "@ideas": {
+        "description": "Texto mostrado en el Home Scaffold para la seccion de Ideas"
+    },
+    "favorites": "Favoritos",
+    "@favorites": {
+        "description": "Texto mostrado en el Home Scaffold para la seccion de Favoritos"
     }
 }
