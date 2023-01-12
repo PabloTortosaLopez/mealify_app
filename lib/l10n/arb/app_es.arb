@@ -11,5 +11,13 @@
     "favorites": "Favoritos",
     "@favorites": {
         "description": "Texto mostrado en el Home Scaffold para la seccion de Favoritos"
+    },
+     "reload": "Recargar",
+    "@reload": {
+        "description": "Texto para el boton de recargar en la pantalla de ideas"
+    },
+    "save": "Guardar",
+    "@save": {
+        "description": "Texto para el boton de guardar en favoritos en la pantalla de ideas"
     }
 }

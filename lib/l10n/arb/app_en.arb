@@ -11,5 +11,13 @@
     "favorites": "Favorites",
     "@favorites": {
         "description": "Text shown in the Home Scaffold for the Favorites section"
+    },
+    "reload": "Reload",
+    "@reload": {
+        "description": "Text for the reload button in ideas page"
+    },
+    "save": "Save",
+    "@save": {
+        "description": "Text for the save button in ideas page"
     }
 }

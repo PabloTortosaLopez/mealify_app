@@ -2,6 +2,7 @@ import 'package:adaptive_navigation/adaptive_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mealify_app/home/home.dart';
+import 'package:mealify_app/ideas/ideas.dart';
 import 'package:mealify_app/l10n/l10n.dart';
 
 class HomeScaffold extends StatelessWidget {
@@ -28,9 +29,8 @@ class HomeView extends StatelessWidget {
           appBar: AppBar(
             title: Text(l10n.mealify),
           ),
-          // body: index == 0 ? const IdeasPage() : const FavoritesPage(),
+          body: index == 0 ? const IdeasPage() : Container(),
           selectedIndex: index,
-          body: Container(),
           destinations: [
             AdaptiveScaffoldDestination(
               title: l10n.ideas,
