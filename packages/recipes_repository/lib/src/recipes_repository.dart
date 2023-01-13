@@ -21,8 +21,10 @@ class RecipesRepository {
   /// if any of the API calls failed.
   Future<Pairing> getRandomPairing() async {
     try {
-      final result = await Future.wait(
-          [_drinksApiClient.getRandomDrink(), _mealsApiClient.getRandomMeal()]);
+      final result = await Future.wait([
+        _drinksApiClient.getRandomDrink(),
+        _mealsApiClient.getRandomMeal(),
+      ]);
       final randomDrinks = result[0] as Drinks;
       final randomMeals = result[1] as Meals;
       return Pairing.fromApi(randomDrinks, randomMeals);
