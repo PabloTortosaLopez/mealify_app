@@ -114,6 +114,7 @@ class _IdeasFailure extends StatelessWidget {
   }
 }
 
+// TODO(pablo): extract this widget to UI package
 class _ShowMeMoreButton extends StatelessWidget {
   // ignore: use_super_parameters
   const _ShowMeMoreButton({
@@ -159,45 +160,37 @@ class _IdeaCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 550),
-      child: Card(
-        child: Column(
-          children: [
-            Expanded(
-              child: Image.network(
-                imageUrl,
+    return Card(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: InkWell(
+              onTap: () {},
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {},
-                      child: Text(
-                        title,
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                    ),
+          ),
+          Expanded(
+            child: Stack(
+              children: [
+                Image.network(
+                  imageUrl,
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.lock_open,
+                    color: Colors.green,
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.lock_open,
-                        color: Colors.green,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
-              ),
+                  onPressed: () {},
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
