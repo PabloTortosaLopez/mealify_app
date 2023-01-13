@@ -113,6 +113,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.1"
+  dio:
+    dependency: transitive
+    description:
+      name: dio
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.6"
+  equatable:
+    dependency: "direct main"
+    description:
+      name: equatable
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -198,6 +212,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.4"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.7.0"
   logging:
     dependency: transitive
     description:
@@ -219,6 +240,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.5"
+  meals_and_drinks_api_client:
+    dependency: "direct main"
+    description:
+      path: "packages/meals_and_drinks_api_client"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   meta:
     dependency: transitive
     description:
@@ -289,6 +317,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  recipes_repository:
+    dependency: "direct main"
+    description:
+      path: "packages/recipes_repository"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   shelf:
     dependency: transitive
     description:

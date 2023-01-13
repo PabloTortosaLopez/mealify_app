@@ -3,6 +3,8 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:meals_and_drinks_api_client/meals_and_drinks_api_client.dart';
+import 'package:recipes_repository/recipes_repository.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -18,15 +20,32 @@ class AppBlocObserver extends BlocObserver {
   }
 }
 
-Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+typedef AppBuilder = FutureOr<Widget> Function(
+  RecipesRepository recipesRepository,
+);
+
+Future<void> bootstrap(AppBuilder builder) async {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
   Bloc.observer = AppBlocObserver();
 
+  final mealApiClient = MealsAndDrinksApiClient.mealsFree();
+  final cocktailApiClient = MealsAndDrinksApiClient.drinksFree();
+
+  final recipesRepository = RecipesRepository(
+    mealsApiClient: mealApiClient,
+    drinksApiClient: cocktailApiClient,
+  );
+
   await runZonedGuarded(
-    () async => runApp(await builder()),
+    () async {
+      Bloc.observer = AppBlocObserver();
+      return runApp(
+        await builder(recipesRepository),
+      );
+    },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }

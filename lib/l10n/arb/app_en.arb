@@ -19,5 +19,9 @@
     "save": "Save",
     "@save": {
         "description": "Text for the save button in ideas page"
+    },
+    "somethingWentWrong": "Something went wrong",
+    "@somethingWentWrong": {
+        "description": "Error text when any of the API calls fails"
     }
 }

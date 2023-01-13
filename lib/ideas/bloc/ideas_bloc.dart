@@ -1,11 +1,52 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:recipes_repository/recipes_repository.dart';
 
 part 'ideas_event.dart';
 part 'ideas_state.dart';
 
 class IdeasBloc extends Bloc<IdeasEvent, IdeasState> {
-  IdeasBloc() : super(IdeasInitial()) {
-    on<IdeasEvent>((event, emit) {});
+  IdeasBloc(
+    this._recipesRepository,
+  ) : super(IdeasLoading()) {
+    on<IdeasLoaded>(_onIdeasLoaded);
+    on<ShowMeMorePressed>(_onShowMeMorePressed);
+  }
+
+  final RecipesRepository _recipesRepository;
+
+  Future<void> _onIdeasLoaded(
+    IdeasLoaded event,
+    Emitter<IdeasState> emit,
+  ) {
+    return _loadRandomPairing(emit);
+  }
+
+  Future<void> _onShowMeMorePressed(
+    ShowMeMorePressed event,
+    Emitter<IdeasState> emit,
+  ) async {
+    //if (state is IdeasSuccess) {
+    //final current = state as IdeasSuccess;
+    // if (current.isCocktailLocked && !current.isRecipeLocked) {
+    // return _loadRandomRecipe(emit);
+    //} else if (current.isRecipeLocked && !current.isCocktailLocked) {
+    // return _loadRandomCocktail(emit);
+    //} else if (current.isRecipeLocked && current.isCocktailLocked) {
+    //  return;
+    //}
+    //}
+    return _loadRandomPairing(emit);
+  }
+
+  Future<void> _loadRandomPairing(Emitter<IdeasState> emit) async {
+    emit(IdeasLoading());
+    try {
+      final pairing = await _recipesRepository.getRandomPairing();
+      emit(IdeasSuccess.newPairing(pairing));
+    } catch (_) {
+      emit(IdeasFailure());
+    }
   }
 }

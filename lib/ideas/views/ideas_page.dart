@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mealify_app/ideas/bloc/ideas_bloc.dart';
 import 'package:mealify_app/l10n/l10n.dart';
+import 'package:recipes_repository/recipes_repository.dart';
 
 class IdeasPage extends StatelessWidget {
   const IdeasPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const IdeasView();
+    return BlocProvider(
+      create: (context) => IdeasBloc(
+        context.read<RecipesRepository>(),
+      )..add(IdeasLoaded()),
+      child: const IdeasView(),
+    );
   }
 }
 
@@ -15,15 +23,42 @@ class IdeasView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<IdeasBloc, IdeasState>(
+      builder: (context, state) {
+        if (state is IdeasLoading) {
+          return _IdeasLoading();
+        } else if (state is IdeasSuccess) {
+          return _IdeasSuccess(state: state);
+        }
+
+        return _IdeasFailure();
+      },
+    );
+  }
+}
+
+class _IdeasSuccess extends StatelessWidget {
+  // ignore: use_super_parameters
+  const _IdeasSuccess({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  final IdeasSuccess state;
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final recipe = state.pairing.recipe;
+    final cocktail = state.pairing.cocktail;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Expanded(
+          Expanded(
             child: _IdeaCard(
-              imageUrl:
-                  'https://fra1.digitaloceanspaces.com/hundred-pro/media/web_header/burger-hero.7bb52c6.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=IL4R4JH76EHIESLIHYRD%2F20230111%2Ffra1%2Fs3%2Faws4_request&X-Amz-Date=20230111T161923Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=6354ccdb4126c41dcdc988a315f58d6d7b6aa62fd8f9d6f4e53132222553e638',
+              title: recipe.name,
+              imageUrl: recipe.thumbnailUrl,
             ),
           ),
           Padding(
@@ -31,26 +66,78 @@ class IdeasView extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(l10n.reload),
+                _ShowMeMoreButton(
+                  onPressed: () =>
+                      context.read<IdeasBloc>().add(const ShowMeMorePressed()),
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                  onPressed: () => {},
+                  onPressed: () {},
                   child: Text(l10n.save),
                 ),
               ],
             ),
           ),
-          const Expanded(
+          Expanded(
             child: _IdeaCard(
-              imageUrl:
-                  'https://images.hola.com/imagenes/cocina/recetas/20190806147086/receta-batido-galletas-oreo-vainilla/0-707-944/recetas-postres-faciles-galletas-oreo-t.jpg?tx=w_1200',
+              title: cocktail.name,
+              imageUrl: cocktail.thumbnailUrl,
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _IdeasFailure extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.warning_amber_rounded, size: 75, color: Colors.red),
+          Text(
+            l10n.somethingWentWrong,
+            style: Theme.of(context).textTheme.headline5,
+          ),
+          const SizedBox(height: 10),
+          _ShowMeMoreButton(
+            onPressed: () =>
+                context.read<IdeasBloc>().add(const ShowMeMorePressed()),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ShowMeMoreButton extends StatelessWidget {
+  // ignore: use_super_parameters
+  const _ShowMeMoreButton({
+    Key? key,
+    required this.onPressed,
+  }) : super(key: key);
+
+  final void Function() onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(l10n.reload),
+    );
+  }
+}
+
+class _IdeasLoading extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: CircularProgressIndicator(),
     );
   }
 }
@@ -61,10 +148,14 @@ class _IdeaCard extends StatelessWidget {
   const _IdeaCard({
     Key? key,
     required this.imageUrl,
+    required this.title,
   }) : super(key: key);
 
   /// Meal or Drink Image URL
   final String imageUrl;
+
+  /// Card title
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +178,7 @@ class _IdeaCard extends StatelessWidget {
                     child: InkWell(
                       onTap: () {},
                       child: Text(
-                        'title',
+                        title,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),

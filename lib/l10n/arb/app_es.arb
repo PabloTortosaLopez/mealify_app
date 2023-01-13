@@ -4,7 +4,7 @@
     "@mealify": {
         "description": "AppBar Title"
     },
-   "ideas": "Ideas",
+    "ideas": "Ideas",
     "@ideas": {
         "description": "Texto mostrado en el Home Scaffold para la seccion de Ideas"
     },
@@ -12,12 +12,16 @@
     "@favorites": {
         "description": "Texto mostrado en el Home Scaffold para la seccion de Favoritos"
     },
-     "reload": "Recargar",
+    "reload": "Recargar",
     "@reload": {
         "description": "Texto para el boton de recargar en la pantalla de ideas"
     },
     "save": "Guardar",
     "@save": {
         "description": "Texto para el boton de guardar en favoritos en la pantalla de ideas"
+    },
+    "somethingWentWrong": "Algo ha ido mal",
+    "@somethingWentWrong": {
+        "description": "Texto de error cuando cualquiera de las llamadas a la API falla"
     }
 }
