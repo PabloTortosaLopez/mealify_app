@@ -240,6 +240,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.5"
+  mealify_ui:
+    dependency: "direct main"
+    description:
+      path: "packages/mealify_ui"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   meals_and_drinks_api_client:
     dependency: "direct main"
     description:
@@ -262,12 +269,19 @@ packages:
     source: hosted
     version: "1.0.2"
   mocktail:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: mocktail
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
+  mocktail_image_network:
+    dependency: transitive
+    description:
+      name: mocktail_image_network
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.1"
   nested:
     dependency: transitive
     description:
