@@ -10,14 +10,14 @@ class IdeasBloc extends Bloc<IdeasEvent, IdeasState> {
   IdeasBloc(
     this._recipesRepository,
   ) : super(IdeasLoading()) {
-    on<IdeasLoaded>(_onIdeasLoaded);
+    on<LoadIdeas>(_onLoadIdeas);
     on<ShowMeMorePressed>(_onShowMeMorePressed);
   }
 
   final RecipesRepository _recipesRepository;
 
-  Future<void> _onIdeasLoaded(
-    IdeasLoaded event,
+  Future<void> _onLoadIdeas(
+    LoadIdeas event,
     Emitter<IdeasState> emit,
   ) {
     return _loadRandomPairing(emit);

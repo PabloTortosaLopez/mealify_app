@@ -12,7 +12,7 @@ class IdeasPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => IdeasBloc(
         context.read<RecipesRepository>(),
-      )..add(IdeasLoaded()),
+      )..add(LoadIdeas()),
       child: const IdeasView(),
     );
   }

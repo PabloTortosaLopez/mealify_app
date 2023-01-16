@@ -8,7 +8,7 @@ abstract class IdeasEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class IdeasLoaded extends IdeasEvent {}
+class LoadIdeas extends IdeasEvent {}
 
 class ShowMeMorePressed extends IdeasEvent {
   const ShowMeMorePressed();
