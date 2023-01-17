@@ -71,13 +71,13 @@ class _IdeasSuccess extends StatelessWidget {
                   title: l10n.reload,
                   backgroundColor: Colors.blue,
                   onPressed: () =>
-                      context.read<IdeasBloc>().add(const ShowMeMorePressed()),
+                      context.read<IdeasBloc>().add(ShowMeMorePressed()),
                 ),
-                IdeaActionButton(
-                  title: l10n.save,
-                  backgroundColor: Colors.red,
-                  onPressed: () {},
-                ),
+                // IdeaActionButton(
+                //   title: l10n.save,
+                //   backgroundColor: Colors.red,
+                //   onPressed: () {},
+                // ),
               ],
             ),
           ),
@@ -110,8 +110,7 @@ class _IdeasFailure extends StatelessWidget {
           IdeaActionButton(
             title: l10n.reload,
             backgroundColor: Colors.blue,
-            onPressed: () =>
-                context.read<IdeasBloc>().add(const ShowMeMorePressed()),
+            onPressed: () => context.read<IdeasBloc>().add(ShowMeMorePressed()),
           ),
         ],
       ),

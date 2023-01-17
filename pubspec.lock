@@ -276,7 +276,7 @@ packages:
     source: hosted
     version: "0.3.0"
   mocktail_image_network:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: mocktail_image_network
       url: "https://pub.dartlang.org"
