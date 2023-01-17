@@ -17,8 +17,12 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
+  mealify_ui:
+    path: packages/mealify_ui
   meals_and_drinks_api_client:
     path: packages/meals_and_drinks_api_client
+  mocktail: ^0.3.0
+  mocktail_image_network: ^0.3.1
   recipes_repository:
     path: packages/recipes_repository
   
@@ -27,7 +31,6 @@ dev_dependencies:
   bloc_test: ^9.1.0
   flutter_test:
     sdk: flutter
-  mocktail: ^0.3.0
   very_good_analysis: ^3.1.0
 
 flutter:

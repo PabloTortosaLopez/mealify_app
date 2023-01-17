@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mealify_app/ideas/bloc/ideas_bloc.dart';
 import 'package:mealify_app/l10n/l10n.dart';
+import 'package:mealify_ui/mealify_ui.dart';
 import 'package:recipes_repository/recipes_repository.dart';
 
 class IdeasPage extends StatelessWidget {
@@ -56,7 +57,7 @@ class _IdeasSuccess extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: _IdeaCard(
+            child: IdeaCard(
               title: recipe.name,
               imageUrl: recipe.thumbnailUrl,
             ),
@@ -66,20 +67,22 @@ class _IdeasSuccess extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _ShowMeMoreButton(
+                IdeaActionButton(
+                  title: l10n.reload,
+                  backgroundColor: Colors.blue,
                   onPressed: () =>
-                      context.read<IdeasBloc>().add(const ShowMeMorePressed()),
+                      context.read<IdeasBloc>().add(ShowMeMorePressed()),
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                  onPressed: () {},
-                  child: Text(l10n.save),
-                ),
+                // IdeaActionButton(
+                //   title: l10n.save,
+                //   backgroundColor: Colors.red,
+                //   onPressed: () {},
+                // ),
               ],
             ),
           ),
           Expanded(
-            child: _IdeaCard(
+            child: IdeaCard(
               title: cocktail.name,
               imageUrl: cocktail.thumbnailUrl,
             ),
@@ -104,32 +107,13 @@ class _IdeasFailure extends StatelessWidget {
             style: Theme.of(context).textTheme.headline5,
           ),
           const SizedBox(height: 10),
-          _ShowMeMoreButton(
-            onPressed: () =>
-                context.read<IdeasBloc>().add(const ShowMeMorePressed()),
+          IdeaActionButton(
+            title: l10n.reload,
+            backgroundColor: Colors.blue,
+            onPressed: () => context.read<IdeasBloc>().add(ShowMeMorePressed()),
           ),
         ],
       ),
-    );
-  }
-}
-
-// TODO(pablo): extract this widget to UI package
-class _ShowMeMoreButton extends StatelessWidget {
-  // ignore: use_super_parameters
-  const _ShowMeMoreButton({
-    Key? key,
-    required this.onPressed,
-  }) : super(key: key);
-
-  final void Function() onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    return ElevatedButton(
-      onPressed: onPressed,
-      child: Text(l10n.reload),
     );
   }
 }
@@ -139,59 +123,6 @@ class _IdeasLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: CircularProgressIndicator(),
-    );
-  }
-}
-
-// TODO(pablo): extract this widget to UI package
-class _IdeaCard extends StatelessWidget {
-  // ignore: use_super_parameters
-  const _IdeaCard({
-    Key? key,
-    required this.imageUrl,
-    required this.title,
-  }) : super(key: key);
-
-  /// Meal or Drink Image URL
-  final String imageUrl;
-
-  /// Card title
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: InkWell(
-              onTap: () {},
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Stack(
-              children: [
-                Image.network(
-                  imageUrl,
-                ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.lock_open,
-                    color: Colors.green,
-                  ),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
