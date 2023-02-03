@@ -8,7 +8,7 @@ environment:
   flutter: 3.3.8
 
 dependencies:
-  adaptive_navigation: ^0.0.7
+  adaptive_navigation: ^0.0.9
   bloc: ^8.1.0
   equatable: ^2.0.5
   flutter:
